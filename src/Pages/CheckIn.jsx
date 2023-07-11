@@ -3,6 +3,8 @@ import Map from "../Components/BottomNav/Map";
 import { useRef, useState } from 'react';
 import Webcam from 'react-webcam';
 import { Link, useNavigate } from 'react-router-dom';
+import getDate from '../Utils/getDate.utils';
+import getTime from '../Utils/getTime.utils';
 
 function CheckIn() {
     const webcamRef = useRef(null);
@@ -12,21 +14,8 @@ function CheckIn() {
 
     const navigate = useNavigate();
 
-    const date = new Date(); // Replace with your desired date
-
-    const day = date.getDate();
-    const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date);
-    const year = date.getFullYear();
-
-    const formattedDate = `${day} ${month} ${year}`;
-
-    const time = new Date(); // Current date and time
-
-    const hours = time.getHours().toString().padStart(2, '0');
-    const minutes = time.getMinutes().toString().padStart(2, '0');
-    const seconds = time.getSeconds().toString().padStart(2, '0');
-
-    const formattedTime = `${hours}:${minutes}:${seconds}`;
+    const formattedTime = getTime();
+    const formattedDate = getDate();
 
     const sumbitCheckIn = () => {
         // Replace with your API call

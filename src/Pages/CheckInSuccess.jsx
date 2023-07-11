@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom"
+import getDate from "../Utils/getDate.utils"
+import getTime from "../Utils/getTime.utils"
 
 function CheckInSuccess() {
+
+    const formattedDate = getDate()
+    const formattedTime = getTime()
+
     return (
         <div className="h-screen flex flex-col justify-center items-center px-4 text-center">
             <div className="success-icon">
@@ -23,8 +29,8 @@ function CheckInSuccess() {
                 <p className="text-xs px-4 text-gray-500">Anda telah tercatat absen dengan keterangan sebagai berikut:</p>
             </div>
             <div className="time-checkin">
-                <h2 className="font-semibold text-lg mt-4">Waktu Masuk: 10 Juni 2021</h2>
-                <p className="font-semibold text-black px-4 text-2xl">08:00</p>
+                <h2 className="font-semibold text-lg mt-4">Waktu Masuk: {formattedDate}</h2>
+                <p className="font-semibold text-black px-4 text-2xl">{formattedTime}</p>
             </div>
             <div className="success-btn w-full mt-10">
                 <Link to='/dashboard' className="inline-block w-full bg-orange-400 hover:bg-orange-500 cursor-pointer transition px-4 py-2 mx-auto rounded-full text-lg text-white font-bold mt-4">
