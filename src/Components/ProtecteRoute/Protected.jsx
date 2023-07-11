@@ -15,8 +15,6 @@ function Protected({ children }) {
             localStorage.removeItem('user')
             return <Navigate to='/login' />
         }
-
-        console.log(decoded)
     }
 
     return children
