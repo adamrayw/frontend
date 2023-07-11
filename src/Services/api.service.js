@@ -12,4 +12,13 @@ const useApiPost = async (url, data) => {
     }
 }
 
-export { useApiPost }
+const useApiGet = async (url) => {
+    try {
+        const response = await axios.get(api + url)
+        return { response, err: null }
+    } catch (error) {
+        return { response: null, err: error }
+    }
+}
+
+export { useApiPost, useApiGet }
