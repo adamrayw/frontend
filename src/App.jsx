@@ -19,7 +19,11 @@ function App() {
             <Dashboard />
           </Protected>
         } />
-        <Route path='/check-in' element={<CheckIn />} />
+        <Route path='/check-in' element={
+          <Protected>
+            <CheckIn />
+          </Protected>
+        } />
         <Route path='/check-in-success' element={<CheckInSuccess />} />
         <Route path='*' element={<Navigate to='/login' />} />
       </Routes>
