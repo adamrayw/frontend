@@ -5,6 +5,7 @@ import CheckIn from './Pages/CheckIn'
 import BottomNavigation from './Components/BottomNav/BottomNavigation'
 import CheckInSuccess from './Pages/CheckInSuccess'
 import Protected from './Components/ProtecteRoute/Protected'
+import Activity from './Pages/Activity'
 
 function App() {
 
@@ -22,6 +23,11 @@ function App() {
         <Route path='/check-in' element={
           <Protected>
             <CheckIn />
+          </Protected>
+        } />
+        <Route path='/activity' element={
+          <Protected>
+            <Activity />
           </Protected>
         } />
         <Route path='/check-in-success' element={<CheckInSuccess />} />
