@@ -10,9 +10,11 @@ import Watch from '../assets/icon-watch.png'
 import background from '../assets/backgroundOpacity.png'
 import Logo from '../assets/Logo.png'
 import { Link, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useApiGet } from '../Services/api.service'
 
 function Dashboard() {
-
+    const [isCheckIn, setIsCheckIn] = useState(false)
     const user = JSON.parse(localStorage.getItem('user'))
 
     const navigate = useNavigate()
@@ -23,8 +25,22 @@ function Dashboard() {
         navigate('/login')
     }
 
+    const checkCheckIn = async () => {
+        const response = await useApiGet('checkin/get/checkintoday/' + user.id)
+
+        if (response.response.data.data.checkins.length > 0) {
+            setIsCheckIn(true)
+        } else {
+            setIsCheckIn(false)
+        }
+    }
+
+    useEffect(() => {
+        checkCheckIn()
+    }, [])
+
     return (
-        <div className="relative dashboard mx-auto h-screen max-w-sm px-4 pb-10 pt-4 "
+        <div className="relative dashboard mx-auto h-screen max-w-sm px-4 pb-10 pt-4"
             style={{
                 backgroundImage: `url('${background}')`,
                 backgroundSize: 'contain',
@@ -137,22 +153,32 @@ function Dashboard() {
                     Mulai
                 </a>
             </div>
-            <div className="kegiatan-saya mt-6">
-                <h2 className="font-bold text-xl flex items-center">
-                    Kegiatan Saya
-                    <svg
-                        fill="currentColor"
-                        viewBox="0 0 16 16"
-                        height="20"
-                        width="20"
-                    >
-                        <path
-                            fillRule="evenodd"
-                            d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z"
-                        />
-                    </svg>
-                </h2>
-
+            <div className="kegiatan-saya mt-6 space-y-2">
+                <div className="kegiatan-saya-title">
+                    <h2 className="font-bold text-xl flex items-center">
+                        Kegiatan Saya
+                        <svg
+                            fill="currentColor"
+                            viewBox="0 0 16 16"
+                            height="20"
+                            width="20"
+                        >
+                            <path
+                                fillRule="evenodd"
+                                d="M4.646 1.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L10.293 8 4.646 2.354a.5.5 0 010-.708z"
+                            />
+                        </svg>
+                    </h2>
+                </div>
+                {isCheckIn && (
+                    <div className="kegiatan-content">
+                        <div className="kegiatan-content-item">
+                            <div className="card bg-white p-4 rounded-lg shadow-lg font-semibold text-sm text-center">
+                                Klik Menu <span className='text-orange-500'>Acitivity</span>, untuk update aktivitasmu
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     )
