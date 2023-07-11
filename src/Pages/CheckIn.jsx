@@ -40,6 +40,10 @@ function CheckIn() {
         try {
             setIsLoadingAbsen(true)
             const response = await useApiPost('checkin', data)
+            if (response.response.data.isCheckin === true) {
+                alert('Anda sudah melakukan absen hari ini')
+            }
+
             if (response.response.data.message === 'Checkin success') {
                 navigate('/check-in-success')
             }
