@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-hooks/rules-of-hooks */
 import Profile from '../assets/profile.png'
 import Activity from '../assets/activity.png'
 import Collaborator from '../assets/collaborator.png'
@@ -79,13 +81,15 @@ function Dashboard() {
                     />
                 </div>
                 <div>
-                    <img
-                        width="80"
-                        height="auto"
-                        className="mx-auto"
-                        src={Activity}
-                        alt="activity-logo"
-                    />
+                    <Link to='/activity'>
+                        <img
+                            width="80"
+                            height="auto"
+                            className="mx-auto"
+                            src={Activity}
+                            alt="activity-logo"
+                        />
+                    </Link>
                 </div>
                 <div>
                     <img
