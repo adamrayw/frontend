@@ -1,10 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 
-const Map = () => {
+// eslint-disable-next-line react/prop-types
+const Map = ({ sendDataToParent }) => {
     const mapContainerRef = useRef(null);
     const map = useRef(null);
     const [address, setAddress] = useState('');
+
+    const handleClick = (longitude, latitude, address) => {
+        const data = {
+            longitude,
+            latitude,
+            address,
+        };
+
+        sendDataToParent(data);
+    };
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -22,6 +33,7 @@ const Map = () => {
                     map.current.on('load', () => {
                         const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${position.coords.longitude},${position.coords.latitude}.json?access_token=${import.meta.env.VITE_REACT_APP_MAPBOX_TOKEN}`;
 
+
                         fetch(url)
                             .then((response) => response.json())
                             .then((data) => {
@@ -29,6 +41,7 @@ const Map = () => {
                                 if (features.length > 0) {
                                     const address = features[0].place_name;
                                     setAddress(address);
+                                    handleClick(position.coords.longitude, position.coords.latitude, address);
                                 }
                             })
                             .catch((error) => {
