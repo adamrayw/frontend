@@ -98,7 +98,7 @@ const Map = ({ sendDataToParent, longitude, latitude, addressFromActivity }) => 
     return (
         <div style={{ width: '100%', height: '100%' }} >
             <div ref={mapContainerRef} style={{ width: '100%', height: '100%' }} />
-            <div className="lokasi-operasi space-y-2 mb-8 mt-4 md:p-0 p-4">
+            <div className="lokasi-operasi space-y-2 mb-8 mt-2 md:p-0 p-4">
                 <h2 className="font-semibold">Lokasi Operasi SAR</h2>
                 <p className="text-xs text-gray-400">{address}</p>
                 <hr />

@@ -58,13 +58,13 @@ function Activity() {
                                     }
                                 </div>
                                 <div className='p-4'>
-                                    <div className="date-operation mt-24">
+                                    <div className="date-operation mt-28">
                                         <div className="date-operation-title text-center">
                                             <h1 className="time text-4xl font-bold">{formatTime(activity[0].createdAt)}</h1>
                                             <h2 className="text-gray-500">Untuk: {formatDate(activity[0].createdAt)}</h2>
                                         </div>
                                     </div>
-                                    <div className='catat mt-6 space-y-2'>
+                                    <div className='catat mt-8 space-y-2'>
                                         <h2 className='font-semibold'>Catat aktifitas anda disini:</h2>
                                         <div>
                                             <button className='flex items-center text-sm'>
