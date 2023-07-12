@@ -146,7 +146,7 @@ function CheckIn() {
                                     (modeSelfie ? { facingMode: "user" } : { facingMode: { exact: "environment" } })
                                 }
                                 screenshotFormat='image/jpeg'
-                                // mirrored='false'
+                                mirrored='false'
                                 ref={webcamRef}
                                 className='rounded-t-xl' />
 
