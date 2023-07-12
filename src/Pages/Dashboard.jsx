@@ -14,9 +14,11 @@ import Logo from '../assets/Logo.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useApiGet } from '../Services/api.service'
+import formatTime from '../Utils/formatTime'
 
 function Dashboard() {
     const [isCheckIn, setIsCheckIn] = useState(false)
+    const [catatan, setCatatan] = useState([])
     const user = JSON.parse(localStorage.getItem('user'))
 
     const navigate = useNavigate()
@@ -31,10 +33,12 @@ function Dashboard() {
         const response = await useApiGet('checkin/get/checkintoday/' + user.id)
 
         if (response.response.data.data.checkins.length > 0) {
+            setCatatan(response.response.data.data.checkins[0].catatans)
             setIsCheckIn(true)
         } else {
             setIsCheckIn(false)
         }
+
     }
 
     useEffect(() => {
@@ -175,16 +179,48 @@ function Dashboard() {
                     </h2>
                 </div>
                 {isCheckIn && (
-                    <div className="kegiatan-content">
-                        <div className="kegiatan-content-item">
-                            <div className="card bg-white p-4 rounded-lg shadow-lg font-semibold text-sm text-center">
-                                Klik Menu <span className='text-orange-500'>Acitivity</span>, untuk update aktivitasmu
-                            </div>
-                        </div>
-                    </div>
+                    <>
+                        {catatan.length > 0 ? (
+                            <>
+                                {catatan.map((item, index) => (
+                                    <div className="kegiatan-content" key={index}>
+                                        <div className='flex items-center space-x-4 bg-white shadow-lg p-2 rounded-lg  text-green-500'>
+                                            <div>
+                                                <svg
+                                                    fill="currentColor"
+                                                    viewBox="0 0 16 16"
+                                                    height="2em"
+                                                    width="2em"
+                                                    className='text-green-500s'
+                                                >
+                                                    <path d="M13.854 3.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3.5-3.5a.5.5 0 11.708-.708L6.5 10.293l6.646-6.647a.5.5 0 01.708 0z" />
+                                                </svg>
+                                            </div>
+                                            <div className="activity-noted-item-time">
+                                                <h1 className="text-green-500">{formatTime(item.createdAt)}</h1>
+                                            </div>
+                                            <div className="activity-noted-item-title">
+                                                <h1 className="text-lg font-semibold">{item.deskripsi}</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </>
+                        )
+                            :
+                            (
+                                <div className="kegiatan-content">
+                                    <div className="kegiatan-content-item">
+                                        <div className="card bg-white p-4 rounded-lg shadow-lg font-semibold text-sm text-center">
+                                            Klik Menu <span className='text-orange-500'>Acitivity</span>, untuk update aktivitasmu
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                    </>
                 )}
             </div>
-        </div>
+        </div >
     )
 }
 
