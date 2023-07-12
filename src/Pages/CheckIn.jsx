@@ -147,7 +147,7 @@ function CheckIn() {
                                 }
                                 screenshotFormat='image/jpeg'
                                 mirrored={
-                                    modeSelfie ? false : true
+                                    modeSelfie ? true : false
                                 }
                                 ref={webcamRef}
                                 className='rounded-t-xl' />
